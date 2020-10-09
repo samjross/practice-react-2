@@ -1,5 +1,5 @@
 import React from "react";
-import {ThemeContext} from "../context/fakeContext";
+import {ThemeContext} from "../context/ThemeContext";
 import hoistNonReactStatic from 'hoist-non-react-statics';
 
 export function ConsumerWrapper(WrappedComponent) {

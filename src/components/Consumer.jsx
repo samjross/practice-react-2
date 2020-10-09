@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import autobind from 'react-autobind';
-import {ThemeContext} from '../context/fakeContext';
+import {ThemeContext} from '../context/ThemeContext';
 
 
 // functional consumer
