@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {toggleTheme, setTheme, thunkedToggler} from '../redux/actions/theme-actions';
 
 function WC(props) {
-    const {theme, toggleTheme, thunkedToggler, setTheme} = props;
+    const {theme, loading, toggleTheme, thunkedToggler, setTheme} = props;
     console.log('props', props);
 
     function set() {
@@ -43,13 +43,15 @@ function WC(props) {
             <p>{props.secondaryMessage}</p>
             <button onClick={set}>set theme to red and blue</button>
             <button onClick={toggleOrangePurple}>toggle orange / purple</button>
+            {loading && <p>loading...</p>}
         </div>
     )
 }
 
 export const ConnectedComponent = connect(
     (state) => ({
-        theme: state.theme
+        theme: state.theme,
+        loading: state.theme.loading
     }),
     {
         toggleTheme, setTheme, thunkedToggler

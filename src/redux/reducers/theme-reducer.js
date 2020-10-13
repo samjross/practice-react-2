@@ -1,15 +1,17 @@
-import  { TOGGLE_THEME, SET_THEME }  from '../actions/theme-actions';
+import  { TOGGLE_THEME, SET_THEME, SET_LOADING }  from '../actions/theme-actions';
 
 export const themes = {
     light: {
         foreground: '#000000',
         background: '#eeeeee',
-        name: 'light'
+        name: 'light',
+        loading: false
     },
     dark: {
         foreground: '#ffffff',
         background: '#222222',
-        name: 'dark'
+        name: 'dark',
+        loading: false
     },
 };
 
@@ -34,6 +36,11 @@ export default function(state=initialState, action) {
                 ...state,
                 ...action.theme
             };
+        case SET_LOADING:
+            return {
+                ...state,
+                loading: action.loading
+            }
         default:
             return state;
     }
