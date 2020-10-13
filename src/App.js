@@ -2,9 +2,11 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import autobind from 'react-autobind';
-import {ThemeContextProvider} from './context/ThemeContext';
-import {Consumer} from "./components/Consumer";
-import WC from "./components/WC";
+import {Provider} from "react-redux";
+import {store} from './redux/reducers'; // this is from index.js
+import {ConnectedComponent} from "./components/WC";
+import {ConnectedConsumer as Consumer} from "./components/Consumer";
+
 
 class App extends Component {
 
@@ -19,12 +21,13 @@ class App extends Component {
 
     render() {
         return (
-            <ThemeContextProvider>
+            <Provider store={store}>
                 <Consumer/>
-                <WC secondaryMessage="yes boi"/>
-            </ThemeContextProvider>
+                <ConnectedComponent secondaryMessage="this is the secondary message"/>
+            </Provider>
         );
     }
 }
 
 export default App;
+

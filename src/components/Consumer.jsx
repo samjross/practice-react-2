@@ -1,44 +1,32 @@
-import React, {Component} from 'react';
-import autobind from 'react-autobind';
-import {ThemeContext} from '../context/ThemeContext';
+import React from "react";
+import {connect} from 'react-redux';
+import {toggleTheme, setTheme} from '../redux/actions/theme-actions'
 
 
 // functional consumer
 export const Consumer = props => {
+    const {theme, toggleTheme} = props;
     return (
-        <ThemeContext.Consumer>
-            {({theme, toggleTheme}) => (
+        <div>
+
                 <button
                     onClick={toggleTheme}
+                    // onClick={() => setTheme({foreground: 'orange', background: 'black'})}
                     style={{color:theme.foreground, background:theme.background}}
                 >
                     Toggle Theme
                 </button>
-            )}
-        </ThemeContext.Consumer>
+
+        </div>
     )
 }
 
-// stateful consumer
-// export class Consumer extends React.Component {
-//
-//     constructor(props) {
-//         super(props);
-//
-//         autobind(this);
-//     }
-//
-//     render() {
-//         return (
-//             <ThemeContext.Consumer>
-//                 {({theme, toggleTheme}) => (
-//                     <button
-//                         onClick={toggleTheme}
-//                         >
-//                         Toggle Theme
-//                     </button>
-//                 )}
-//             </ThemeContext.Consumer>
-//         )
-//     }
-// }
+export const ConnectedConsumer = connect(
+    (state) => ({
+        theme: state.theme
+    }),
+    (dispatch) => ({
+        toggleTheme: () => dispatch(toggleTheme()),
+        setTheme: (...args) => dispatch(setTheme(...args))
+    }) // this is the more verbose alternative to the syntax in WC, where you just pass an object here instead of a function
+)(Consumer);

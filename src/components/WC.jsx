@@ -1,14 +1,24 @@
 import React from "react";
-import {ConsumerWrapper} from "./ConsumerWrapper";
+import {connect} from 'react-redux';
+import {toggleTheme, setTheme} from '../redux/actions/theme-actions'
 
 function WC(props) {
     const {theme, toggleTheme,setTheme} = props;
+    console.log('props', props);
 
     function set() {
-        if (theme.foreground === 'blue') {
-            setTheme('red','blue');
+        if (theme.name === 'blue') {
+            setTheme({
+                name: 'red',
+                foreground: 'red',
+                background: 'blue'
+            });
         } else {
-            setTheme('blue','red');
+            setTheme({
+                name: 'blue',
+                foreground: 'blue',
+                background: 'red'
+            });
         }
     }
 
@@ -21,4 +31,11 @@ function WC(props) {
     )
 }
 
-export default ConsumerWrapper(WC);
+export const ConnectedComponent = connect(
+    (state) => ({
+        theme: state.theme
+    }),
+    {
+        toggleTheme, setTheme
+    } // see the alternative in Consumer for the more verbose version
+)(WC);
