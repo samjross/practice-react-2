@@ -11,3 +11,19 @@ export function setTheme(theme) {
         theme
     }
 }
+
+export function thunkedToggler([theme1, theme2]) {
+    return (dispatch, getState) => {
+        const currentTheme = getState().theme;
+        let theme;
+        if (currentTheme.name === theme1.name) {
+            theme = theme2;
+        } else {
+            theme = theme1;
+        }
+        dispatch({
+            type: SET_THEME,
+            theme
+        });
+    }
+}

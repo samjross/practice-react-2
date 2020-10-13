@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 import themeReducer from './theme-reducer';
 import cartReducer from './cart-reducer';
-import { createStore } from "redux";
+import { createStore, applyMiddleware  } from "redux";
+import thunk from 'redux-thunk';
+
 
 const allReducers = {
     theme: themeReducer,
@@ -9,4 +11,4 @@ const allReducers = {
 };
 
 export const rootReducer = combineReducers(allReducers);
-export const store = createStore(rootReducer);
+export const store = createStore(rootReducer, applyMiddleware(thunk));
